@@ -22,6 +22,7 @@ import DashboardPaymentAssetCompatibilityCheck from "@/components/features/dashb
 import PayoutScheduleCollisionPanel from "@/components/features/dashboard/PayoutScheduleCollisionPanel";
 import DashboardCompensationPolicyCheck from "@/components/features/dashboard/DashboardCompensationPolicyCheck";
 import DashboardEmployeeEligibilityStatusCheck from "@/components/features/dashboard/DashboardEmployeeEligibilityStatusCheck";
+import DashboardPayoutVarianceAnomalyDetection from "@/components/features/dashboard/DashboardPayoutVarianceAnomalyDetection";
 import { MOCK_COMPANIES, MOCK_EMPLOYEES } from "@/lib/api/mockData";
 
 function DashboardHome() {
@@ -174,6 +175,9 @@ function DashboardHome() {
       </ErrorBoundary>
       <ErrorBoundary>
         <DashboardCompensationPolicyCheck />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <DashboardPayoutVarianceAnomalyDetection />
       </ErrorBoundary>
       <ErrorBoundary>
         <SystemStatus />
