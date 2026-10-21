@@ -23,6 +23,7 @@ import PayoutScheduleCollisionPanel from "@/components/features/dashboard/Payout
 import DashboardCompensationPolicyCheck from "@/components/features/dashboard/DashboardCompensationPolicyCheck";
 import DashboardEmployeeEligibilityStatusCheck from "@/components/features/dashboard/DashboardEmployeeEligibilityStatusCheck";
 import DashboardPayoutVarianceAnomalyDetection from "@/components/features/dashboard/DashboardPayoutVarianceAnomalyDetection";
+import DashboardOrganizationConfigChangeLedger from "@/components/features/dashboard/DashboardOrganizationConfigChangeLedger";
 import { MOCK_COMPANIES, MOCK_EMPLOYEES } from "@/lib/api/mockData";
 
 function DashboardHome() {
@@ -178,6 +179,9 @@ function DashboardHome() {
       </ErrorBoundary>
       <ErrorBoundary>
         <DashboardPayoutVarianceAnomalyDetection />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <DashboardOrganizationConfigChangeLedger />
       </ErrorBoundary>
       <ErrorBoundary>
         <SystemStatus />
