@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Dashboard Organization Settings Validation History**: Records a privacy-safe, capped history of organization settings validation runs in the dashboard layer.
+  - Pure domain module `src/settings/validationHistory.ts` with `recordSettingsValidation` and `getSettingsValidationHistoryStats`, building on the existing `validateCompanyConfig` flow without modifying it
+  - Entries capture `passed` / `failed` status, error and warning counts, failing check labels and messages, company id, and an ISO-8601 timestamp; wallet addresses, salary figures, and employee data never enter an entry
+  - Runtime input validation returning `{ ok: false, error }` results with actionable `[Action] failed: [reason]. [Next step].` copy (non-array history, missing or malformed checks, invalid validation clock) — the recorder never throws
+  - Retention cap of the newest 50 entries (`MAX_SETTINGS_VALIDATION_HISTORY`) with newest-first ordering, plus aggregate stats (total, passed, failed, last run status and timestamp)
+  - Feature notes in `docs/ORGANIZATION_SETTINGS_VALIDATION_HISTORY.md`
+  - Focused test suite `__tests__/settings-validation-history.test.ts` covering success, failure, runtime error, retention-cap, empty-history, and privacy cases
+
 - **Dashboard Concurrent Payroll Edit Warnings (#739)**: Implements optimistic lock detection, active editor presence warnings, and session validity controls when multiple operators edit payroll drafts and runs simultaneously.
   - Pure domain module `src/payroll/concurrentPayrollEditWarning.ts` and re-export `lib/payroll/concurrentPayrollEditWarning.ts` evaluating `version_mismatch`, `session_expired`, `concurrent_active_editor`, and `stale_timestamp` conflicts.
   - Structured conflict decision engine (`evaluateConcurrentPayrollEdits`) returning actionable recommended actions (`reload_latest`, `review_changes`, `renew_session`, `proceed_with_caution`) and blocking status.
